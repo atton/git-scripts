@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -d .git ]; then
+    echo '.git not found.'
+    echo 'Please execute in repository-root directory.'
+    return 1
+fi
+
+set -x
+git config --local gc.auto 3000
+git config --local gc.pruneExpire '1 weeks ago'
+git config --local gc.reflogexpire '30 days'
