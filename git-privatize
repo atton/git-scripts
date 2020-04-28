@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ ! -d .git ]; then
+    echo '.git not found.'
+    echo 'Please execute in repository-root directory.'
+    return 1
+fi
+
+set -x
+
+rm -rf /tmp/git-stash-hooks
+mkdir -p /tmp/git-stash-hooks
+mv .git/hooks/* /tmp/git-stash-hooks
+echo "#!/bin/sh" > .git/hooks/pre-push
+echo "exit 1"   >> .git/hooks/pre-push
+chmod 755 .git/hooks/pre-push
